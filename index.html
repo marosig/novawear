@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NovaWear - Elevate Your Performance</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-purple: hsl(262, 83%, 58%);
+            --secondary-blue: hsl(221, 83%, 53%);
+            --bg-light: hsl(0, 0%, 100%);
+            --text-dark: hsl(0, 0%, 5%);
+            --muted: hsl(0, 0%, 96%);
+            --border: hsl(0, 0%, 90%);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            color: var(--text-dark);
+            background: var(--bg-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0.95);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-blue));
+            opacity: 0.1;
+            z-index: -1;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            width: 100%;
+        }
+
+        .hero-content {
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .brand-logo {
+            font-size: clamp(3rem, 7vw, 6rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+        }
+
+        .brand-logo .highlight {
+            color: var(--primary-purple);
+        }
+
+        .tagline {
+            font-size: clamp(1.25rem, 3vw, 2rem);
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+            color: hsl(0, 0%, 30%);
+        }
+
+        .hero-description {
+            font-size: clamp(1.125rem, 2vw, 1.25rem);
+            line-height: 1.8;
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            color: hsl(0, 0%, 20%);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            font-size: 1.125rem;
+            font-weight: 600;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: 2px solid transparent;
+        }
+
+        .btn-primary {
+            background: var(--primary-purple);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 60px rgba(139, 92, 246, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-dark);
+            border-color: var(--border);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary-purple);
+            color: var(--primary-purple);
+        }
+
+        .btn svg {
+            width: 20px;
+            height: 20px;
+            transition: transform 0.3s;
+        }
+
+        .btn-primary:hover svg {
+            transform: rotate(12deg) scale(1.1);
+        }
+
+        .hero-visual {
+            position: relative;
+            animation: fadeIn 1s ease-out 0.2s both;
+        }
+
+        .hero-image-container {
+            position: relative;
+            border-radius: 2rem;
+            overflow: hidden;
+            transition: all 0.5s;
+        }
+
+        .hero-image-container:hover {
+            transform: scale(1.02);
+            box-shadow: 0 30px 60px rgba(139, 92, 246, 0.3);
+        }
+
+        .hero-image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .floating-accent {
+            position: absolute;
+            width: 384px;
+            height: 384px;
+            background: var(--primary-purple);
+            filter: blur(96px);
+            opacity: 0.3;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: float 3s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        /* Product Section */
+        .product-section {
+            padding: 6rem 0;
+            background: hsla(0, 0%, 96%, 0.3);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: var(--secondary-blue);
+            color: white;
+            border-radius: 2rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-size: clamp(1.125rem, 2vw, 1.25rem);
+            color: hsl(0, 0%, 40%);
+            max-width: 48rem;
+            margin: 0 auto;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .product-image-card {
+            background: linear-gradient(180deg, white, hsl(0, 0%, 98%));
+            padding: 2rem;
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.5s;
+        }
+
+        .product-image-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 60px rgba(139, 92, 246, 0.3);
+        }
+
+        .product-image-card img {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            border-radius: 1rem;
+        }
+
+        .product-info {
+            animation: fadeIn 0.8s ease-out 0.2s both;
+        }
+
+        .product-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .product-title {
+            font-size: clamp(1.875rem, 3vw, 2.25rem);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-price {
+            font-size: clamp(1.5rem, 2.5vw, 1.875rem);
+            font-weight: 600;
+            color: var(--primary-purple);
+        }
+
+        .product-description {
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            color: hsl(0, 0%, 30%);
+        }
+
+        .size-selector {
+            margin-bottom: 2rem;
+        }
+
+        .size-label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+        }
+
+        .size-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .size-badge {
+            padding: 0.5rem 1rem;
+            border: 2px solid var(--border);
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .size-badge:hover {
+            border-color: var(--primary-purple);
+            background: var(--primary-purple);
+            color: white;
+        }
+
+        .features {
+            margin-bottom: 2rem;
+        }
+
+        .features-title {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .feature-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            min-width: 48px;
+            background: hsla(262, 83%, 58%, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .feature-icon svg {
+            width: 24px;
+            height: 24px;
+            color: var(--primary-purple);
+        }
+
+        .feature-content h3 {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .feature-content p {
+            font-size: 0.875rem;
+            color: hsl(0, 0%, 40%);
+        }
+
+        .material-box {
+            background: hsla(0, 0%, 96%, 0.5);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            margin-bottom: 2rem;
+        }
+
+        .material-title {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .btn-whatsapp {
+            width: 100%;
+            background: #25D366;
+            color: white;
+            justify-content: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .btn-whatsapp:hover {
+            background: #22c55e;
+            transform: translateY(-2px);
+            box-shadow: 0 20px 60px rgba(37, 211, 102, 0.3);
+        }
+
+        .btn-whatsapp svg {
+            transition: transform 0.3s;
+        }
+
+        .btn-whatsapp:hover svg {
+            transform: scale(1.1);
+        }
+
+        .support-text {
+            text-align: center;
+            font-size: 0.75rem;
+            color: hsl(0, 0%, 50%);
+        }
+
+        /* Footer */
+        .footer {
+            border-top: 1px solid var(--border);
+            padding: 3rem 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-brand h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-brand h3 .highlight {
+            color: var(--primary-purple);
+        }
+
+        .footer-brand p {
+            color: hsl(0, 0%, 40%);
+        }
+
+        .footer-links h4,
+        .footer-connect h4 {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            display: block;
+            color: hsl(0, 0%, 40%);
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-purple);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--muted);
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-dark);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-icon:hover {
+            background: var(--primary-purple);
+            color: white;
+        }
+
+        .social-icon svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .footer-connect p {
+            font-size: 0.875rem;
+            color: hsl(0, 0%, 40%);
+        }
+
+        .copyright {
+            border-top: 1px solid var(--border);
+            padding-top: 2rem;
+            margin-top: 2rem;
+            text-align: center;
+            font-size: 0.875rem;
+            color: hsl(0, 0%, 50%);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+
+            .hero-grid,
+            .product-grid {
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .hero {
+                min-height: auto;
+                padding: 3rem 0;
+            }
+
+            .hero-grid,
+            .product-grid,
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .hero-grid {
+                grid-template-rows: auto auto;
+            }
+
+            .hero-content {
+                order: 1;
+            }
+
+            .hero-visual {
+                order: 2;
+            }
+
+            .brand-logo {
+                font-size: 2.5rem;
+                text-align: center;
+            }
+
+            .tagline {
+                font-size: 1.25rem;
+                text-align: center;
+            }
+
+            .hero-description {
+                font-size: 1rem;
+                text-align: center;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+                padding: 0.875rem 1.5rem;
+                font-size: 1rem;
+            }
+
+            .floating-accent {
+                width: 200px;
+                height: 200px;
+            }
+
+            .hero-image-container {
+                border-radius: 1rem;
+            }
+
+            .product-section {
+                padding: 3rem 0;
+            }
+
+            .section-header {
+                margin-bottom: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .section-subtitle {
+                font-size: 1rem;
+            }
+
+            .product-image-card {
+                padding: 1rem;
+            }
+
+            .product-title {
+                font-size: 1.5rem;
+            }
+
+            .product-price {
+                font-size: 1.5rem;
+            }
+
+            .product-description {
+                font-size: 0.938rem;
+            }
+
+            .feature-item {
+                margin-bottom: 1rem;
+            }
+
+            .feature-icon {
+                width: 40px;
+                height: 40px;
+                min-width: 40px;
+            }
+
+            .feature-icon svg {
+                width: 20px;
+                height: 20px;
+            }
+
+            .material-box {
+                padding: 1rem;
+            }
+
+            .footer {
+                padding: 2rem 0;
+            }
+
+            .footer-grid {
+                gap: 2rem;
+            }
+
+            .footer-brand,
+            .footer-links,
+            .footer-connect {
+                text-align: center;
+            }
+
+            .social-icons {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .brand-logo {
+                font-size: 2rem;
+            }
+
+            .tagline {
+                font-size: 1.125rem;
+            }
+
+            .hero-description {
+                font-size: 0.938rem;
+            }
+
+            .section-title {
+                font-size: 1.75rem;
+            }
+
+            .product-title {
+                font-size: 1.375rem;
+            }
+
+            .btn {
+                padding: 0.75rem 1.25rem;
+                font-size: 0.938rem;
+            }
+
+            .size-options {
+                justify-content: center;
+            }
+
+            .size-badge {
+                padding: 0.5rem 0.875rem;
+                font-size: 0.875rem;
+            }
+        }
+
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <h1 class="brand-logo">NOVA<span class="highlight">WEAR</span></h1>
+                    <p class="tagline">Elevate Your Performance</p>
+                    <p class="hero-description">
+                        Experience the perfect fusion of style and performance with NovaWear athletic apparel. Engineered for champions, designed for excellence, built to push your limits.
+                    </p>
+                    <div class="cta-buttons">
+                        <a href="https://wa.me/0697002685?text=Hi!%20I'm%20interested%20in%20the%20NovaWear%20Performance%20Tee" target="_blank" class="btn btn-primary">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                            Order on WhatsApp
+                        </a>
+                        <a href="#product" class="btn btn-outline">View Details</a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="floating-accent"></div>
+                    <div class="hero-image-container">
+                        <img src="569334429_1137464995032651_6431580444160338443_n.jpg" alt="NovaWear Performance Tee">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Section -->
+    <section id="product" class="product-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="badge">Featured Product</span>
+                <h2 class="section-title">Performance Tee</h2>
+                <p class="section-subtitle">The ultimate athletic t-shirt engineered for peak performance</p>
+            </div>
+
+            <div class="product-grid">
+                <div class="product-image-card">
+                    <img src="528050125_1134684138710868_2843712425579035548_n.jpg" alt="NovaWear Performance Tee">
+                </div>
+
+                <div class="product-info">
+                    <div class="product-header">
+                        <h3 class="product-title">NovaWear Performance Tee</h3>
+                        <p class="product-price">$12.99</p>
+                    </div>
+
+                    <p class="product-description">
+                        Experience unmatched comfort and performance with our signature Performance Tee. Crafted with advanced moisture-wicking fabric technology, this premium athletic shirt keeps you dry and comfortable during the most intense workouts. The lightweight, breathable material ensures maximum airflow while maintaining durability through countless training sessions.
+                    </p>
+
+                    <div class="size-selector">
+                        <label class="size-label">Available Sizes</label>
+                        <div class="size-options">
+                            <span class="size-badge">S</span>
+                            <span class="size-badge">M</span>
+                            <span class="size-badge">L</span>
+                            <span class="size-badge">XL</span>
+                            <span class="size-badge">XXL</span>
+                        </div>
+                    </div>
+
+                    <div class="features">
+                        <h4 class="features-title">Key Features</h4>
+                        
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
+                            </div>
+                            <div class="feature-content">
+                                <h3>Premium Fabric</h3>
+                                <p>Moisture-wicking technology keeps you dry</p>
+                            </div>
+                        </div>
+
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                            </div>
+                            <div class="feature-content">
+                                <h3>4-Way Stretch</h3>
+                                <p>Maximum flexibility for any movement</p>
+                            </div>
+                        </div>
+
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                            </div>
+                            <div class="feature-content">
+                                <h3>Odor Resistant</h3>
+                                <p>Stay fresh throughout your workout</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="material-box">
+                        <h4 class="material-title">Material Composition</h4>
+                        <p>88% Polyester, 12% Spandex - Breathable, lightweight, and built to last</p>
+                    </div>
+
+                    <a href="https://wa.me/0697002685?text=Hi!%20I'd%20like%20to%20order%20the%20NovaWear%20Performance%20Tee" target="_blank" class="btn btn-whatsapp">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                        Order Now on WhatsApp
+                    </a>
+                    <p class="support-text">Click to chat directly with our team for instant ordering</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>NOVA<span class="highlight">WEAR</span></h3>
+                    <p>Premium athletic apparel engineered for excellence and performance</p>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <a href="#product">Products</a>
+                    <a href="#">About Us</a>
+                    <a href="#">Shipping Info</a>
+                </div>
+
+                <div class="footer-connect">
+                    <h4>Connect</h4>
+                    <div class="social-icons">
+                        <a href="https://wa.me/0697002685" target="_blank" class="social-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                        </a>
+                        <a href="https://instagram.com/novawear______" target="_blank" class="social-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                        </a>
+                    </div>
+                    <p>Chat with us on WhatsApp for instant support</p>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>© 2025 NovaWear. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.product-info, .section-header').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s, transform 0.6s';
+            observer.observe(el);
+        });
+
+        // Size selector interaction
+        document.querySelectorAll('.size-badge').forEach(badge => {
+            badge.addEventListener('click', function() {
+                document.querySelectorAll('.size-badge').forEach(b => {
+                    b.style.background = '';
+                    b.style.color = '';
+                    b.style.borderColor = 'var(--border)';
+                });
+                this.style.background = 'var(--primary-purple)';
+                this.style.color = 'white';
+                this.style.borderColor = 'var(--primary-purple)';
+            });
+        });
+    </script>
+</body>
+</html>
